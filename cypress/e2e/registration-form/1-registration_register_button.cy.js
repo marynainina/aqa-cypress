@@ -1,25 +1,18 @@
+import registrationPage from "../Pages/RegistrationPage";
+
 describe("Successful registration, Register button", () => {
   beforeEach(() => {
     cy.visit("https://guest:welcome2qauto@qauto.forstudy.space/");
-    cy.get(".hero-descriptor_btn.btn.btn-primary").should("be.visible").click();
+    registrationPage.clickSignupButton();
     cy.get(".modal-content").should("be.visible");
   });
   it("Successful registration, register button enabled", () => {
-    cy.get('input[id="signupName"]').should("be.visible").type("Maryna");
-    cy.get('input[id="signupLastName"]').should("be.visible").type("Inina");
-    cy.get('input[id="signupEmail"]')
-      .should("be.visible")
-      .type(`test+${Date.now()}@gmail.com`);
-    cy.get('input[id="signupPassword"]')
-      .should("be.visible")
-      .type("Q-w-e-123@");
-    cy.get('input[id="signupRepeatPassword"]')
-      .should("be.visible")
-      .type("Q-w-e-123@");
-    cy.get(".modal-footer")
-      .find(".btn.btn-primary")
-      .should("be.visible")
-      .click();
+    registrationPage.typeName("Maryna");
+    registrationPage.typeLastName("Inina");
+    registrationPage.typeEmail(`test+${Date.now()}@gmail.com`);
+    registrationPage.typePassword("Q-w-e-123@");
+    registrationPage.typeRepeatPassword("Q-w-e-123@");
+    registrationPage.clickRegisterButton();
     cy.url().should("eq", "https://qauto.forstudy.space/panel/garage");
   });
 
@@ -41,3 +34,4 @@ describe("Successful registration, Register button", () => {
       .should("be.disabled");
   });
 });
+console.log(registrationPage);
